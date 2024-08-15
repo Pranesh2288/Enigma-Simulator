@@ -16,11 +16,12 @@ public:
     Plugboard pb;
     Keyboard kb;
 
-    Enigma(char reflector, vector<string> rotors, vector<pair<char, char>> plugboard, vector<char> key, vector<int> rings);
+    Enigma(char reflector, vector<string> rotors, vector<char> key, vector<int> rings, vector<pair<char, char>> plugboard);
     void setKey(vector<char> key);
     void setRings(vector<int> key);
     char encipher(char letter);
     string encipher(string message);
+    void showSettings();
 };
 
 #endif

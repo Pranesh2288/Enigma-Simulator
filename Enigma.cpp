@@ -1,6 +1,7 @@
 #include "Enigma.h"
+#include <iostream>
 
-Enigma::Enigma(char reflector, vector<string> rotors, vector<pair<char, char>> plugboard, vector<char> key, vector<int> rings)
+Enigma::Enigma(char reflector, vector<string> rotors, vector<char> key, vector<int> rings, vector<pair<char, char>> plugboard)
     : Reflector(reflector), // Initialize base class Reflector
       Rotor(rotors[0]),     // Initialize base class Rotor
       Plugboard(plugboard), // Initialize base class Plugboard
@@ -73,6 +74,33 @@ string Enigma::encipher(string message)
 {
     string cipher_text = "";
     for (char letter : message)
-        cipher_text += encipher(letter);
+    {
+        if (letter >= 'a' && letter <= 'z')
+        {
+            letter = toupper(letter);
+            cipher_text += encipher(letter);
+        }
+        else if (letter >= 'A' && letter <= 'Z')
+        {
+            cipher_text += encipher(letter);
+        }
+        else
+        {
+            cipher_text += letter;
+        }
+    }
     return cipher_text;
+}
+
+void Enigma::showSettings()
+{
+    cout << "Reflector: " << re.getName() << endl;
+    cout << "Rotors (from left to right): " << r1.getName() << " " << r2.getName() << " " << r3.getName() << endl;
+    cout << "Key: " << r1.getKey() << " " << r2.getKey() << " " << r3.getKey() << endl;
+    cout << "Ring: " << r1.getRing() << " " << r2.getRing() << " " << r3.getRing() << endl;
+    vector<pair<char, char>> p = pb.getPair();
+    for (pair<char, char> pair : p)
+    {
+        cout << pair.first << pair.second << endl;
+    }
 }

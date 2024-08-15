@@ -2,6 +2,7 @@
 
 Plugboard::Plugboard(vector<pair<char, char>> pairs)
 {
+    p = pairs;
     left = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     right = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     if (pairs.size() == 0)
@@ -30,4 +31,9 @@ int Plugboard::backward(int signal)
     char letter = left[signal];
     signal = right.find(letter);
     return signal;
+}
+
+vector<pair<char, char>> Plugboard::getPair()
+{
+    return p;
 }

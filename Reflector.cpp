@@ -1,17 +1,18 @@
 #include "Reflector.h"
 
-Reflector::Reflector(const char &name)
+Reflector::Reflector(const char &N)
 {
+    name = N;
     left = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (name == 'A')
+    if (N == 'A')
     {
         right = "EJMZALYXVBWFCRQUONTSPIKHGD";
     }
-    else if (name == 'B')
+    else if (N == 'B')
     {
         right = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
     }
-    else if (name == 'C')
+    else if (N == 'C')
     {
         right = "FVPJIAOYEDRZXWGCTKUQSBNMHL";
     }
@@ -26,4 +27,9 @@ int Reflector::reflect(int signal)
     char letter = right[signal];
     signal = left.find(letter);
     return signal;
+}
+
+string Reflector::getName()
+{
+    return name;
 }

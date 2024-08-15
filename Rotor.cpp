@@ -1,31 +1,32 @@
 #include "Rotor.h"
 #include <iostream>
 
-Rotor::Rotor(const string &name)
+Rotor::Rotor(const string &N)
 {
+    name = N;
     left = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (name == "I")
+    if (N == "I")
     {
         right = "EKMFLGDQVZNTOWYHXUSPAIBRCJ";
         notch = 'Q';
     }
-    else if (name == "II")
+    else if (N == "II")
     {
         right = "AJDKSIRUXBLHWTMCQGZNPYFVOE";
         notch = 'E';
     }
-    else if (name == "III")
+    else if (N == "III")
     {
         right = "BDFHJLCPRTXVZNYEIWGAKMUSQO";
         notch = 'V';
     }
 
-    else if (name == "IV")
+    else if (N == "IV")
     {
         right = "ESOVPZJAYQUIRHXLNFTGKDCMWB";
         notch = 'J';
     }
-    else if ("V")
+    else if (N == "V")
     {
         right = "VZBRGITYUPSDNHLXAWMJQOFECK";
         notch = 'Z';
@@ -91,4 +92,34 @@ void Rotor::set_ring(int n)
     if ((n_notch - n) % 26 >= 0)
         notch = left[(n_notch - n) % 26];
     notch = left[((n_notch - n) % 26 + 26) % 26];
+}
+
+char Rotor::getKey()
+{
+    return left[0];
+}
+
+int Rotor::getRing()
+{
+    int res = 0;
+    if (name == "I")
+        res = -1 * (notch - 'Q');
+    else if (name == "II")
+        res = -1 * (notch - 'E');
+    else if (name == "III")
+        res = -1 * (notch - 'V');
+    else if (name == "IV")
+        res = -1 * (notch - 'J');
+    else if (name == "V")
+        res = -1 * (notch - 'Z');
+    else
+        res = 0;
+    if (res < 0)
+        return res + 26;
+    return res;
+}
+
+string Rotor::getName()
+{
+    return name;
 }
