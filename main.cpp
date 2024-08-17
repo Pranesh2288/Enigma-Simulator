@@ -20,7 +20,7 @@ void manual()
     cout << "Commands: " << endl;
     cout << "detail - To get details about working of enigma machine." << endl;
     cout << "init   - To setup the machine with given settings." << endl;
-    // cout << "view   - To view the current settings." << endl;
+    cout << "view   - To view the current settings." << endl;
     cout << "crypt  - To encrypt / decrypt message." << endl;
     cout << "change - To change the settings of the machine." << endl;
     cout << "clear  - Clears screen." << endl;
@@ -63,7 +63,7 @@ int main()
          << "███████ ██   ████ ██  ██████  ██      ██ ██   ██ " << endl
          << endl;
     manual();
-    Enigma ENIGMA = Enigma('B', {"I", "II", "III"}, {'K', 'A', 'R'}, {13, 21, 5}, {{'A', 'A'}}); // Default settings
+    Enigma ENIGMA = Enigma('B', {"I", "II", "III"}, {13, 21, 5}, {'K', 'A', 'R'}, {{'A', 'A'}}); // Default settings
     // cout << ENIGMA.encipher("test") << endl;
     while (1)
     {
@@ -77,15 +77,15 @@ int main()
             cout << "Enter the Settings of the machine in the following order: " << endl;
             cout << "1. First line should contain Reflector name: Choose one from {'A','B','C'}" << endl
                  << "2. Second line should contain Rotor name and order: Choose three from {'I','II','III','IV','V'}" << endl
-                 << "3. Third line should contain three Key-characters: (Capital letters)" << endl
-                 << "4. Fouth line should contain three Ring-Numbers:(1-26)" << endl
+                 << "3. Third line should contain three Ring-Numbers:(1-26)" << endl
+                 << "4. Fourth line should contain three Key-characters: (Capital letters)" << endl
                  << "5. Last line should contain Plugboard characters:" << endl;
             cout << "Example:" << endl
-                 << "A" << endl
-                 << "I IV V" << endl
-                 << "D V G" << endl
-                 << "12 5 16" << endl
-                 << "DL HK CM" << endl;
+                 << "B" << endl
+                 << "I II III" << endl
+                 << "11 1 18" << endl
+                 << "M U E" << endl
+                 << "GS NY DO" << endl;
 
             cout << ">" << endl;
             char reflector;
@@ -115,19 +115,19 @@ int main()
             }
 
             getline(iss, line);
-            istringstream keyStream(line);
-            char keyElement;
-            while (keyStream >> keyElement)
-            {
-                key.push_back(keyElement);
-            }
-
-            getline(iss, line);
             istringstream ringStream(line);
             int ringElement;
             while (ringStream >> ringElement)
             {
                 ring.push_back(ringElement);
+            }
+
+            getline(iss, line);
+            istringstream keyStream(line);
+            char keyElement;
+            while (keyStream >> keyElement)
+            {
+                key.push_back(keyElement);
             }
 
             getline(iss, line);
@@ -142,12 +142,12 @@ int main()
             if (plugs.size() == 0)
                 plugs = {{'A', 'A'}};
 
-            ENIGMA = Enigma(reflector, rotors, key, ring, plugs);
+            ENIGMA = Enigma(reflector, rotors, ring, key, plugs);
         }
-        // else if (command == "view")
-        // {
-        //     ENIGMA.showSettings();
-        // }
+        else if (command == "view")
+        {
+            ENIGMA.showSettings();
+        }
         else if (command == "crypt")
         {
             string message;
@@ -171,7 +171,6 @@ int main()
         {
             details();
         }
-
         else
         {
             cout << "Command not recognized. Try again." << endl;

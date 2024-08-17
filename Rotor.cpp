@@ -79,7 +79,7 @@ void Rotor::rotate(int n, bool forward)
     }
 }
 
-void Rotor::rotate_to_letter(char letter)
+void Rotor::set_key(char letter)
 {
     int n = left.find(letter);
     rotate(n);

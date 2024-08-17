@@ -18,7 +18,7 @@ public:
     int backward(int signal);
     void show();
     void rotate(int n = 1, bool forward = true);
-    void rotate_to_letter(char letter);
+    void set_key(char letter);
     void set_ring(int n);
     char getKey();
     int getRing();

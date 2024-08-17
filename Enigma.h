@@ -16,7 +16,7 @@ public:
     Plugboard pb;
     Keyboard kb;
 
-    Enigma(char reflector, vector<string> rotors, vector<char> key, vector<int> rings, vector<pair<char, char>> plugboard);
+    Enigma(char reflector, vector<string> rotors, vector<int> rings, vector<char> key, vector<pair<char, char>> plugboard);
     void setKey(vector<char> key);
     void setRings(vector<int> key);
     char encipher(char letter);

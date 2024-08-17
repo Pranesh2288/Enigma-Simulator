@@ -1,7 +1,7 @@
 #include "Enigma.h"
 #include <iostream>
 
-Enigma::Enigma(char reflector, vector<string> rotors, vector<char> key, vector<int> rings, vector<pair<char, char>> plugboard)
+Enigma::Enigma(char reflector, vector<string> rotors, vector<int> rings, vector<char> key, vector<pair<char, char>> plugboard)
     : Reflector(reflector), // Initialize base class Reflector
       Rotor(rotors[0]),     // Initialize base class Rotor
       Plugboard(plugboard), // Initialize base class Plugboard
@@ -19,9 +19,9 @@ Enigma::Enigma(char reflector, vector<string> rotors, vector<char> key, vector<i
 
 void Enigma::setKey(vector<char> key)
 {
-    r1.rotate_to_letter(key[0]);
-    r2.rotate_to_letter(key[1]);
-    r3.rotate_to_letter(key[2]);
+    r1.set_key(key[0]);
+    r2.set_key(key[1]);
+    r3.set_key(key[2]);
 }
 
 void Enigma::setRings(vector<int> key)
@@ -99,8 +99,16 @@ void Enigma::showSettings()
     cout << "Key: " << r1.getKey() << " " << r2.getKey() << " " << r3.getKey() << endl;
     cout << "Ring: " << r1.getRing() << " " << r2.getRing() << " " << r3.getRing() << endl;
     vector<pair<char, char>> p = pb.getPair();
-    for (pair<char, char> pair : p)
+    cout << "Plugs: ";
+    if (p[0].first == 'A' && p[0].second == 'A')
+        cout << endl;
+    else
+
     {
-        cout << pair.first << pair.second << endl;
+        for (pair<char, char> pair : p)
+        {
+            cout << pair.first << pair.second << ", ";
+        }
+        cout << "\b\b " << endl;
     }
 }
